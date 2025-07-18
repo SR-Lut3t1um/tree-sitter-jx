@@ -4,7 +4,7 @@
  * @license MIT
  */
 
-const java = require("tree-sitter-java/grammar");
+const java = require("./tree-sitter-java/grammar");
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
