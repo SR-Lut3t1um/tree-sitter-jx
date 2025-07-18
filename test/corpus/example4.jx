@@ -1,0 +1,15 @@
+==================
+Test #4
+==================
+
+package example.example;
+
+import example.example.Example3;
+
+Example2 (String hellUwU) {
+  <>
+    <h1 id="hello">hello</h1>
+  </>
+
+}
+-----

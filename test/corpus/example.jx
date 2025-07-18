@@ -1,0 +1,32 @@
+==================
+Test Case #1
+==================
+package example.example;
+
+import me.tobiasliese.jx_compiler.jvm.Test;
+import example.example.Example2;
+import example.example.Example3;
+
+Example (String example, float test, Test test1) {
+    <>
+        <h1 id="hello">
+            <h2>
+                Hello world
+            </h2>
+            <h3>
+                {example}
+            </h3>
+            {test}
+            <h4>
+                {test1.test()}
+            </h4>
+
+            <h5/>
+            <Example2>
+            </Example2>
+            <Example3 hellUwU={"Hello world"}/>
+        </h1>
+    </>
+}
+
+---
