@@ -9,6 +9,5 @@ try {
   exit();
 }
 
-console.log(print(parse(source)).code);
 
 

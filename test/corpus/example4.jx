@@ -13,3 +13,44 @@ Example2 (String hellUwU) {
 
 }
 -----
+
+    (program
+      (package_declaration
+        (scoped_identifier
+          (identifier)
+          (identifier)))
+      (import_declarations
+        (import_declaration
+          (scoped_identifier
+            (scoped_identifier
+              (identifier)
+              (identifier))
+            (identifier))))
+      (jx_module_declaration
+        (jx_module_name
+          (identifier))
+        (formal_parameters
+          (formal_parameter
+            (type_identifier)
+            (identifier)))
+        (jx_expression
+          (jx_fragment
+            (jx_children
+              (jx_child
+                (jx_text
+                  (jx_text_character)))
+              (jx_child
+                (jx_element
+                  (html_element
+                    (h1
+                      (h1_attributes
+                        (html_global_attribute
+                          (html_attribute_initilizer
+                            (string_literal))))
+                      (jx_children
+                        (jx_child
+                          (jx_text
+                            (jx_text_character))))))))
+              (jx_child
+                (jx_text
+                  (jx_text_character))))))))
