@@ -54,7 +54,8 @@ module.exports = grammar(java, {
     [$.jx_children],
     [$.argument_list, $.record_pattern_body],
     [$.module_declaration, $.package_declaration, $.modifiers, $.annotated_type],
-    [$.modifiers, $.receiver_parameter]
+    [$.modifiers, $.receiver_parameter],
+    [$.jx_text]
   ],
 
   rules: {
@@ -67,7 +68,20 @@ module.exports = grammar(java, {
       $.import_declaration
     ),
     jx_module_declaration: $ => seq(
-      $.jx_module_name, $.formal_parameters, '{', $.jx_expression, '}'
+      $.jx_module_name,  '{', $.jx_components, '}'
+    ),
+    jx_components: $ => repeat1(
+      $.jx_component
+    ),
+    jx_component: $ => choice(
+      $.jx_render_declaration,
+      $.jx_css_declaration
+    ),
+    jx_render_declaration: $ => seq(
+      'render', $.formal_parameters, '{', $.jx_expression, '}'
+    ),
+    jx_css_declaration: $ => seq(
+      'css', '{', '}',
     ),
     jx_module_name: $ => $.identifier,
     jx_expression: $ => choice(
@@ -143,8 +157,8 @@ module.exports = grammar(java, {
       $.jx_fragment,
       seq('{', $.jx_child_expression, '}')
     ),
-    jx_text: $ => prec.left(
-      repeat1($.jx_text_character),
+    jx_text: $ => repeat1(
+      $.jx_text_character
     ),
     jx_text_character: $ => token(prec(1, /[^"{}<>]+/)), // todo
     jx_child_expression: $ => choice(

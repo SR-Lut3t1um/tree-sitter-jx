@@ -7808,6 +7808,47 @@
           "name": "jx_module_name"
         },
         {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_components"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "jx_components": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "jx_component"
+      }
+    },
+    "jx_component": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "jx_render_declaration"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_css_declaration"
+        }
+      ]
+    },
+    "jx_render_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "render"
+        },
+        {
           "type": "SYMBOL",
           "name": "formal_parameters"
         },
@@ -7818,6 +7859,23 @@
         {
           "type": "SYMBOL",
           "name": "jx_expression"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "jx_css_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "css"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
         },
         {
           "type": "STRING",
@@ -8263,14 +8321,10 @@
       ]
     },
     "jx_text": {
-      "type": "PREC_LEFT",
-      "value": 0,
+      "type": "REPEAT1",
       "content": {
-        "type": "REPEAT1",
-        "content": {
-          "type": "SYMBOL",
-          "name": "jx_text_character"
-        }
+        "type": "SYMBOL",
+        "name": "jx_text_character"
       }
     },
     "jx_text_character": {
@@ -15232,6 +15286,9 @@
     [
       "modifiers",
       "receiver_parameter"
+    ],
+    [
+      "jx_text"
     ]
   ],
   "precedences": [],

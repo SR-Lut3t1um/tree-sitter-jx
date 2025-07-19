@@ -4665,6 +4665,45 @@
     }
   },
   {
+    "type": "jx_component",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "jx_css_declaration",
+          "named": true
+        },
+        {
+          "type": "jx_render_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jx_components",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "jx_component",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jx_css_declaration",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "jx_double_string_characters",
     "named": true,
     "fields": {},
@@ -4806,11 +4845,7 @@
       "required": true,
       "types": [
         {
-          "type": "formal_parameters",
-          "named": true
-        },
-        {
-          "type": "jx_expression",
+          "type": "jx_components",
           "named": true
         },
         {
@@ -4864,6 +4899,25 @@
         },
         {
           "type": "jx_element_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "jx_render_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "formal_parameters",
+          "named": true
+        },
+        {
+          "type": "jx_expression",
           "named": true
         }
       ]
@@ -7055,6 +7109,10 @@
     "named": false
   },
   {
+    "type": "css",
+    "named": false
+  },
+  {
     "type": "data",
     "named": false
   },
@@ -7437,6 +7495,10 @@
   },
   {
     "type": "record",
+    "named": false
+  },
+  {
+    "type": "render",
     "named": false
   },
   {
