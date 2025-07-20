@@ -4,3 +4,6 @@
 [submodule "tree-sitter-css"]
 	path = tree-sitter-css
 	url = https://github.com/SR-Lut3t1um/tree-sitter-css.git
+[submodule "tree-sitter-html"]
+	path = tree-sitter-html
+	url = https://github.com/SR-Lut3t1um/tree-sitter-html.git

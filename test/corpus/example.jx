@@ -7,7 +7,8 @@ import me.tobiasliese.jx_compiler.jvm.Test;
 import example.example.Example2;
 import example.example.Example3;
 
-Example (String example, float test, Test test1) {
+Example {
+  render(String example, float test, Test test1) {
     <>
         <h1 id="hello">
             <h2>
@@ -27,6 +28,7 @@ Example (String example, float test, Test test1) {
             <Example3 hellUwU={"Hello world"}/>
         </h1>
     </>
+    }
 }
 
 ---
