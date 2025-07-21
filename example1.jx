@@ -20,7 +20,7 @@ Example {
             </h1>
             <Example2>
             </Example2>
-            <Example3 hellUwU={"Hello world"}/>
+            <Example3 hellUwU={"Hello world"} />
         </h1>
     }
     css {

@@ -4062,10 +4062,6 @@
           "named": true
         },
         {
-          "type": "jx_attributes_end",
-          "named": true
-        },
-        {
           "type": "tag_name",
           "named": true
         }
@@ -4101,10 +4097,6 @@
       "types": [
         {
           "type": "jx_attributes",
-          "named": true
-        },
-        {
-          "type": "jx_attributes_end",
           "named": true
         },
         {
@@ -7005,10 +6997,6 @@
   {
     "type": "interface",
     "named": false
-  },
-  {
-    "type": "jx_attributes_end",
-    "named": true
   },
   {
     "type": "jx_double_string_character",

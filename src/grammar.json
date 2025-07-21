@@ -226,10 +226,6 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "jx_attributes_end"
-        },
-        {
           "type": "STRING",
           "value": "/>"
         }
@@ -262,10 +258,6 @@
               "type": "BLANK"
             }
           ]
-        },
-        {
-          "type": "SYMBOL",
-          "name": "jx_attributes_end"
         },
         {
           "type": "STRING",
@@ -11149,6 +11141,10 @@
     [
       "jx_self_closing_element",
       "htmlself_closing_tag"
+    ],
+    [
+      "jx_opening_element",
+      "htmlstart_tag"
     ]
   ],
   "precedences": [],

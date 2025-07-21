@@ -347,6 +347,7 @@ static bool scan_end_tag_name(Scanner *scanner, TSLexer *lexer) {
 }
 
 static bool scan_self_closing_tag_delimiter(Scanner *scanner, TSLexer *lexer) {
+    fprintf(stderr, "lokking for self closing\n");
     advance(lexer);
     if (lexer->lookahead == '>') {
         advance(lexer);
@@ -360,6 +361,7 @@ static bool scan_self_closing_tag_delimiter(Scanner *scanner, TSLexer *lexer) {
 }
 
 static bool scan_html(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
+    fprintf(stderr, "scanning html lookahead: %c\n", lexer->lookahead);
     if (valid_symbols[RAW_TEXT] && !valid_symbols[START_TAG_NAME] && !valid_symbols[END_TAG_NAME]) {
         return scan_raw_text(scanner, lexer);
     }
@@ -429,14 +431,12 @@ static bool scan_attributes(Scanner *scanner, TSLexer *lexer, const bool *valid_
 }
 
 static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
-    if (valid_symbols[SELF_CLOSING_TAG_DELIMITER]) {
-        fprintf(stderr, "looking for SELF_CLOSING_TAG_DELIMITER\n");
-        fprintf(stderr, "is_css: %b", (valid_symbols[DESCENDANT_OP] || valid_symbols[PSEUDO_CLASS_SELECTOR_COLON]));
-    }
+    fprintf(stderr, "looking for char %c \n", lexer->lookahead);
+    fprintf(stderr, "is_css: %b \n", valid_symbols[DESCENDANT_OP]);
     bool ret_value = false;
-    if (valid_symbols[JX_ATTRIBUTES]) {
-         ret_value = scan_attributes(scanner, lexer, valid_symbols);
-    }
+    // if (valid_symbols[JX_ATTRIBUTES]) {
+    //      ret_value = scan_attributes(scanner, lexer, valid_symbols);
+    //}
     if (ret_value) {
         return ret_value;
     }

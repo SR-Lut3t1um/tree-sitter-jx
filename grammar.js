@@ -93,6 +93,7 @@ module.exports = grammar({
     [$.modifiers, $.receiver_parameter],
     [$.jx_text],
     [$.jx_self_closing_element, $.htmlself_closing_tag],
+    [$.jx_opening_element, $.htmlstart_tag]
   ],
 
   rules: {
@@ -134,10 +135,10 @@ module.exports = grammar({
       $.jx_self_closing_element,
     ),
     jx_self_closing_element: $ => seq(
-      '<', alias($.jx_element_name, $.tag_name), optional($.jx_attributes), $.jx_attributes_end,  '/>'
+      '<', alias($.jx_element_name, $.tag_name), optional($.jx_attributes), '/>'
     ),
     jx_opening_element: $ => seq(
-      '<', alias($._start_tag_name, $.tag_name), optional($.jx_attributes), $.jx_attributes_end, '>'
+      '<', alias($._start_tag_name, $.tag_name), optional($.jx_attributes), '>'
     ),
     jx_closing_element: $ => seq(
       '</', alias($._end_tag_name, $.tag_name), '>'
