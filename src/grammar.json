@@ -80,8 +80,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "STRING",
+          "value": "render"
         },
         {
           "type": "SYMBOL",
@@ -167,10 +167,6 @@
           "name": "html_node"
         },
         {
-          "type": "SYMBOL",
-          "name": "jx_self_closing_element"
-        },
-        {
           "type": "SEQ",
           "members": [
             {
@@ -194,6 +190,10 @@
               "name": "jx_closing_element"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_self_closing_element"
         }
       ]
     },
@@ -205,8 +205,13 @@
           "value": "<"
         },
         {
-          "type": "SYMBOL",
-          "name": "jx_element_name"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "jx_element_name"
+          },
+          "named": true,
+          "value": "tag_name"
         },
         {
           "type": "CHOICE",
@@ -219,6 +224,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_attributes_end"
         },
         {
           "type": "STRING",
@@ -234,8 +243,13 @@
           "value": "<"
         },
         {
-          "type": "SYMBOL",
-          "name": "jx_element_name"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_start_tag_name"
+          },
+          "named": true,
+          "value": "tag_name"
         },
         {
           "type": "CHOICE",
@@ -248,6 +262,10 @@
               "type": "BLANK"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_attributes_end"
         },
         {
           "type": "STRING",
@@ -263,8 +281,13 @@
           "value": "</"
         },
         {
-          "type": "SYMBOL",
-          "name": "jx_element_name"
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_end_tag_name"
+          },
+          "named": true,
+          "value": "tag_name"
         },
         {
           "type": "STRING",
@@ -11122,6 +11145,10 @@
     ],
     [
       "jx_text"
+    ],
+    [
+      "jx_self_closing_element",
+      "htmlself_closing_tag"
     ]
   ],
   "precedences": [],
@@ -11169,6 +11196,10 @@
     {
       "type": "SYMBOL",
       "name": "_pseudo_class_selector_colon"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "jx_attributes_end"
     },
     {
       "type": "SYMBOL",

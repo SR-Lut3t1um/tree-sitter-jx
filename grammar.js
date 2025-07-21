@@ -61,6 +61,7 @@ module.exports = grammar({
     $.comment,
     $._descendant_operator,
     $._pseudo_class_selector_colon,
+    $.jx_attributes_end,
     $.__error_recovery,
   ],
 
@@ -90,7 +91,8 @@ module.exports = grammar({
     [$.argument_list, $.record_pattern_body],
     [$.module_declaration, $.package_declaration, $.modifiers, $.annotated_type],
     [$.modifiers, $.receiver_parameter],
-    [$.jx_text]
+    [$.jx_text],
+    [$.jx_self_closing_element, $.htmlself_closing_tag],
   ],
 
   rules: {
@@ -114,10 +116,10 @@ module.exports = grammar({
       $.jx_css_declaration
     ),
     jx_render_declaration: $ => seq(
-      $.identifier, $.formal_parameters, '{', $.jx_expression, '}'
+      'render', $.formal_parameters, '{', $.jx_expression, '}'
     ),
     jx_css_declaration: $ => seq(
-      $.identifier, '{', repeat($.css_top_level_item), '}',
+      'css', '{', repeat($.css_top_level_item), '}',
     ),
     jx_expression: $ => choice(
       $.jx_fragment,
@@ -128,17 +130,17 @@ module.exports = grammar({
     ),
     jx_element: $ => choice(
       $.html_node,
+      seq($.jx_opening_element, optional($.jx_children), $.jx_closing_element),
       $.jx_self_closing_element,
-      seq($.jx_opening_element, optional($.jx_children), $.jx_closing_element)
     ),
     jx_self_closing_element: $ => seq(
-      '<', $.jx_element_name, optional($.jx_attributes), '/>'
+      '<', alias($.jx_element_name, $.tag_name), optional($.jx_attributes), $.jx_attributes_end,  '/>'
     ),
     jx_opening_element: $ => seq(
-      '<', $.jx_element_name, optional($.jx_attributes), '>'
+      '<', alias($._start_tag_name, $.tag_name), optional($.jx_attributes), $.jx_attributes_end, '>'
     ),
     jx_closing_element: $ => seq(
-      '</', $.jx_element_name, '>'
+      '</', alias($._end_tag_name, $.tag_name), '>'
     ),
     jx_element_name: $ => choice(
       $.jx_identifier,

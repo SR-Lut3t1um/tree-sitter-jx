@@ -24,8 +24,8 @@ Example {
         </h1>
     }
     css {
-        h1: {
-            background-color: black
+        h1 {
+            background-color: black;
         }
     }
 }

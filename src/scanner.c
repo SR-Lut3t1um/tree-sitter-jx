@@ -2,6 +2,7 @@
 #include "tree_sitter/parser.h"
 
 #include <wctype.h>
+#include <stdio.h>
 
 enum TokenType {
     START_TAG_NAME,
@@ -15,6 +16,7 @@ enum TokenType {
     COMMENT,
     DESCENDANT_OP,
     PSEUDO_CLASS_SELECTOR_COLON,
+    JX_ATTRIBUTES,
     ERROR_RECOVERY,
 };
 
@@ -22,6 +24,7 @@ enum TokenType {
 typedef struct {
     Array(Tag) tags;
 } Scanner;
+
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
@@ -402,13 +405,51 @@ static bool scan_html(Scanner *scanner, TSLexer *lexer, const bool *valid_symbol
     return false;
 }
 
-static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
-    if (valid_symbols[DESCENDANT_OP || valid_symbols[PSEUDO_CLASS_SELECTOR_COLON]]) {
-        return scan_css(scanner, lexer, valid_symbols);
-    } else if (!valid_symbols[ERROR_RECOVERY]) {
-        return scan_html(scanner, lexer, valid_symbols);
+
+static bool scan_attributes(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
+    uint32_t depth = 0;
+    uint32_t last_char = '!';
+    while (!lexer->eof(lexer)) {
+        if (lexer->lookahead == '<') {
+            depth++;
+        }
+        if (lexer->lookahead == '>' && depth == 0) {
+            if (last_char != '/') {
+                lexer->mark_end(lexer);
+            }
+            lexer->result_symbol = JX_ATTRIBUTES;
+            return true;
+        } else {
+            last_char = lexer->lookahead;
+            lexer->mark_end(lexer);
+            advance(lexer);
+        }
     }
     return false;
+}
+
+static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
+    if (valid_symbols[SELF_CLOSING_TAG_DELIMITER]) {
+        fprintf(stderr, "looking for SELF_CLOSING_TAG_DELIMITER\n");
+        fprintf(stderr, "is_css: %b", (valid_symbols[DESCENDANT_OP] || valid_symbols[PSEUDO_CLASS_SELECTOR_COLON]));
+    }
+    bool ret_value = false;
+    if (valid_symbols[JX_ATTRIBUTES]) {
+         ret_value = scan_attributes(scanner, lexer, valid_symbols);
+    }
+    if (ret_value) {
+        return ret_value;
+    }
+    if (!valid_symbols[ERROR_RECOVERY]) {
+        ret_value =  scan_html(scanner, lexer, valid_symbols);
+    }
+    if (valid_symbols[DESCENDANT_OP] || valid_symbols[PSEUDO_CLASS_SELECTOR_COLON]) {
+        ret_value =  scan_css(scanner, lexer, valid_symbols);
+    }
+    if (ret_value) {
+        return ret_value;
+    }
+    return ret_value;
 }
 
 

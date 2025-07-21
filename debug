@@ -1,0 +1,182 @@
+(ERROR [0, 0] - [31, 0]
+  (package_declaration [0, 0] - [0, 24]
+    (scoped_identifier [0, 8] - [0, 23]
+      scope: (identifier [0, 8] - [0, 15])
+      name: (identifier [0, 16] - [0, 23])))
+  (import_declarations [2, 0] - [5, 32]
+    (import_declaration [2, 0] - [2, 43]
+      (scoped_identifier [2, 7] - [2, 42]
+        scope: (scoped_identifier [2, 7] - [2, 37]
+          scope: (scoped_identifier [2, 7] - [2, 33]
+            scope: (scoped_identifier [2, 7] - [2, 21]
+              scope: (identifier [2, 7] - [2, 9])
+              name: (identifier [2, 10] - [2, 21]))
+            name: (identifier [2, 22] - [2, 33]))
+          name: (identifier [2, 34] - [2, 37]))
+        name: (identifier [2, 38] - [2, 42])))
+    (import_declaration [4, 0] - [4, 32]
+      (scoped_identifier [4, 7] - [4, 31]
+        scope: (scoped_identifier [4, 7] - [4, 22]
+          scope: (identifier [4, 7] - [4, 14])
+          name: (identifier [4, 15] - [4, 22]))
+        name: (identifier [4, 23] - [4, 31])))
+    (import_declaration [5, 0] - [5, 32]
+      (scoped_identifier [5, 7] - [5, 31]
+        scope: (scoped_identifier [5, 7] - [5, 22]
+          scope: (identifier [5, 7] - [5, 14])
+          name: (identifier [5, 15] - [5, 22]))
+        name: (identifier [5, 23] - [5, 31]))))
+  (identifier [7, 0] - [7, 7])
+  (identifier [8, 4] - [8, 10])
+  (formal_parameters [8, 11] - [8, 51]
+    (formal_parameter [8, 12] - [8, 26]
+      type: (type_identifier [8, 12] - [8, 18])
+      name: (identifier [8, 19] - [8, 26]))
+    (formal_parameter [8, 28] - [8, 38]
+      type: (floating_point_type [8, 28] - [8, 33])
+      name: (identifier [8, 34] - [8, 38]))
+    (formal_parameter [8, 40] - [8, 50]
+      type: (type_identifier [8, 40] - [8, 44])
+      name: (identifier [8, 45] - [8, 50])))
+  (jx_opening_element [9, 8] - [9, 36]
+    (jx_element_name [9, 9] - [9, 11]
+      (jx_identifier [9, 9] - [9, 11]
+        (identifier [9, 9] - [9, 11])))
+    (jx_attributes [9, 12] - [9, 35]
+      (jx_attribute [9, 12] - [9, 35]
+        (jx_attribute_name [9, 12] - [9, 14]
+          (jx_identifier [9, 12] - [9, 14]
+            (identifier [9, 12] - [9, 14])))
+        (jx_attribute_initilizer [9, 14] - [9, 35]
+          (jx_attribute_value [9, 15] - [9, 35]
+            (jx_element [9, 15] - [9, 35]
+              (html_node [9, 15] - [9, 35]
+                (htmltext [9, 15] - [9, 35]))))))))
+  (jx_children [9, 36] - [31, 0]
+    (jx_child [9, 36] - [10, 12]
+      (jx_text [9, 36] - [10, 12]
+        (jx_text_character [9, 36] - [10, 12])))
+    (jx_child [10, 12] - [12, 17]
+      (jx_element [10, 12] - [12, 17]
+        (jx_opening_element [10, 12] - [10, 16]
+          (jx_element_name [10, 13] - [10, 15]
+            (jx_identifier [10, 13] - [10, 15]
+              (identifier [10, 13] - [10, 15]))))
+        (jx_children [10, 16] - [12, 12]
+          (jx_child [10, 16] - [12, 12]
+            (jx_text [10, 16] - [12, 12]
+              (jx_text_character [10, 16] - [12, 12]))))
+        (jx_closing_element [12, 12] - [12, 17]
+          (jx_element_name [12, 14] - [12, 16]
+            (jx_identifier [12, 14] - [12, 16]
+              (identifier [12, 14] - [12, 16]))))))
+    (jx_child [12, 17] - [13, 12]
+      (jx_text [12, 17] - [13, 12]
+        (jx_text_character [12, 17] - [13, 12])))
+    (jx_child [13, 12] - [15, 17]
+      (jx_element [13, 12] - [15, 17]
+        (jx_opening_element [13, 12] - [13, 16]
+          (jx_element_name [13, 13] - [13, 15]
+            (jx_identifier [13, 13] - [13, 15]
+              (identifier [13, 13] - [13, 15]))))
+        (jx_children [13, 16] - [15, 12]
+          (jx_child [13, 16] - [14, 16]
+            (jx_text [13, 16] - [14, 16]
+              (jx_text_character [13, 16] - [14, 16])))
+          (jx_child [14, 16] - [14, 25]
+            (jx_element [14, 16] - [14, 25]
+              (html_node [14, 16] - [14, 25]
+                (htmltext [14, 16] - [14, 25]))))
+          (jx_child [14, 25] - [15, 12]
+            (jx_text [14, 25] - [15, 12]
+              (jx_text_character [14, 25] - [15, 12]))))
+        (jx_closing_element [15, 12] - [15, 17]
+          (jx_element_name [15, 14] - [15, 16]
+            (jx_identifier [15, 14] - [15, 16]
+              (identifier [15, 14] - [15, 16]))))))
+    (jx_child [15, 17] - [16, 12]
+      (jx_text [15, 17] - [16, 12]
+        (jx_text_character [15, 17] - [16, 12])))
+    (jx_child [16, 12] - [16, 18]
+      (jx_element [16, 12] - [16, 18]
+        (html_node [16, 12] - [16, 18]
+          (htmltext [16, 12] - [16, 18]))))
+    (jx_child [16, 18] - [17, 12]
+      (jx_text [16, 18] - [17, 12]
+        (jx_text_character [16, 18] - [17, 12])))
+    (jx_child [17, 12] - [19, 17]
+      (jx_element [17, 12] - [19, 17]
+        (jx_opening_element [17, 12] - [17, 16]
+          (jx_element_name [17, 13] - [17, 15]
+            (jx_identifier [17, 13] - [17, 15]
+              (identifier [17, 13] - [17, 15]))))
+        (jx_children [17, 16] - [19, 12]
+          (jx_child [17, 16] - [18, 16]
+            (jx_text [17, 16] - [18, 16]
+              (jx_text_character [17, 16] - [18, 16])))
+          (jx_child [18, 16] - [18, 30]
+            (jx_element [18, 16] - [18, 30]
+              (html_node [18, 16] - [18, 30]
+                (htmltext [18, 16] - [18, 30]))))
+          (jx_child [18, 30] - [19, 12]
+            (jx_text [18, 30] - [19, 12]
+              (jx_text_character [18, 30] - [19, 12]))))
+        (jx_closing_element [19, 12] - [19, 17]
+          (jx_element_name [19, 14] - [19, 16]
+            (jx_identifier [19, 14] - [19, 16]
+              (identifier [19, 14] - [19, 16]))))))
+    (jx_child [19, 17] - [20, 12]
+      (jx_text [19, 17] - [20, 12]
+        (jx_text_character [19, 17] - [20, 12])))
+    (jx_child [20, 12] - [21, 23]
+      (jx_element [20, 12] - [21, 23]
+        (jx_opening_element [20, 12] - [20, 22]
+          (jx_element_name [20, 13] - [20, 21]
+            (jx_identifier [20, 13] - [20, 21]
+              (identifier [20, 13] - [20, 21]))))
+        (jx_children [20, 22] - [21, 12]
+          (jx_child [20, 22] - [21, 12]
+            (jx_text [20, 22] - [21, 12]
+              (jx_text_character [20, 22] - [21, 12]))))
+        (jx_closing_element [21, 12] - [21, 23]
+          (jx_element_name [21, 14] - [21, 22]
+            (jx_identifier [21, 14] - [21, 22]
+              (identifier [21, 14] - [21, 22]))))))
+    (jx_child [21, 23] - [22, 12]
+      (jx_text [21, 23] - [22, 12]
+        (jx_text_character [21, 23] - [22, 12])))
+    (jx_child [22, 12] - [23, 13]
+      (jx_element [22, 12] - [23, 13]
+        (jx_opening_element [22, 12] - [22, 47]
+          (jx_element_name [22, 13] - [22, 21]
+            (jx_identifier [22, 13] - [22, 21]
+              (identifier [22, 13] - [22, 21])))
+          (jx_attributes [22, 22] - [22, 46]
+            (jx_attribute [22, 22] - [22, 46]
+              (jx_attribute_name [22, 22] - [22, 29]
+                (jx_identifier [22, 22] - [22, 29]
+                  (identifier [22, 22] - [22, 29])))
+              (jx_attribute_initilizer [22, 29] - [22, 46]
+                (jx_attribute_value [22, 30] - [22, 46]
+                  (jx_element [22, 30] - [22, 46]
+                    (html_node [22, 30] - [22, 46]
+                      (htmltext [22, 30] - [22, 46]))))))))
+        (jx_children [22, 47] - [23, 8]
+          (jx_child [22, 47] - [23, 8]
+            (jx_text [22, 47] - [23, 8]
+              (jx_text_character [22, 47] - [23, 8]))))
+        (jx_closing_element [23, 8] - [23, 13]
+          (jx_element_name [23, 10] - [23, 12]
+            (jx_identifier [23, 10] - [23, 12]
+              (identifier [23, 10] - [23, 12]))))))
+    (jx_child [23, 13] - [24, 4]
+      (jx_text [23, 13] - [24, 4]
+        (jx_text_character [23, 13] - [24, 4])))
+    (jx_child [24, 4] - [30, 1]
+      (jx_element [24, 4] - [30, 1]
+        (html_node [24, 4] - [30, 1]
+          (htmltext [24, 4] - [30, 1]))))
+    (jx_child [30, 1] - [31, 0]
+      (jx_text [30, 1] - [31, 0]
+        (jx_text_character [30, 1] - [31, 0])))))
+example1.jx	Parse:    9.63 ms	    66 bytes/ms	(ERROR [0, 0] - [31, 0])
