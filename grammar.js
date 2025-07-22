@@ -47,7 +47,6 @@ module.exports = grammar({
     /\s/,
   ],
 
-  word: $ => $.identifier,
 
   externals: $ => [
     $._start_tag_name,
@@ -61,7 +60,6 @@ module.exports = grammar({
     $.comment,
     $._descendant_operator,
     $._pseudo_class_selector_colon,
-    $.jx_attributes_end,
     $.__error_recovery,
   ],
 
@@ -130,18 +128,18 @@ module.exports = grammar({
       seq('<>', $.jx_children, '</>')
     ),
     jx_element: $ => choice(
-      $.html_node,
-      seq($.jx_opening_element, optional($.jx_children), $.jx_closing_element),
-      $.jx_self_closing_element,
+      prec(2, $.html_node),
+      prec(1, seq($.jx_opening_element, optional($.jx_children), $.jx_closing_element)),
+      prec(0, $.jx_self_closing_element),
     ),
     jx_self_closing_element: $ => seq(
-      '<', alias($.jx_element_name, $.tag_name), optional($.jx_attributes), '/>'
+      '<', $._start_tag_name, optional($.jx_attributes), '/>'
     ),
     jx_opening_element: $ => seq(
-      '<', alias($._start_tag_name, $.tag_name), optional($.jx_attributes), '>'
+      '<', $.jx_element_name, optional($.jx_attributes), '>'
     ),
     jx_closing_element: $ => seq(
-      '</', alias($._end_tag_name, $.tag_name), '>'
+      '</', $.jx_element_name, '>'
     ),
     jx_element_name: $ => choice(
       $.jx_identifier,
@@ -190,10 +188,10 @@ module.exports = grammar({
       repeat1($.jx_child)
     ,
     jx_child: $ => choice(
+      seq('{', $.jx_child_expression, '}'),
       $.jx_text,
       $.jx_element,
       $.jx_fragment,
-      seq('{', $.jx_child_expression, '}')
     ),
     jx_text: $ => repeat1(
       $.jx_text_character
@@ -1435,7 +1433,7 @@ module.exports = grammar({
 
     cssmedia_statement: $ => seq(
       '@media',
-      sep1(',', $.css_query),
+      sep1( $.css_query, ','),
       $.cssblock,
     ),
 
@@ -1500,7 +1498,7 @@ module.exports = grammar({
       $.cssblock,
     ),
 
-    cssselectors: $ => sep1(',', $.css_selector),
+    cssselectors: $ => sep1($.css_selector, ','),
 
     cssblock: $ => seq(
       '{',
@@ -1808,7 +1806,7 @@ module.exports = grammar({
 
     cssgrid_value: $ => seq(
       '[',
-      sep1(',', $.css_value),
+      sep1($.css_value, ","),
       ']',
     ),
 
@@ -1965,7 +1963,7 @@ module.exports = grammar({
       seq('"', optional(alias(/[^"]+/, $.htmlattribute_value)), '"'),
     ),
 
-    htmltext: _ => /[^<>&\s]([^<>&]*[^<>&\s])?/,
+    htmltext: _ => /[^<>&\/\{\}\s=](?:[^<>&\/\{\}\s=]*[^<>&\/\{\}\s=])?/,
   }
 });
 

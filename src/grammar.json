@@ -1,7 +1,6 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "jx",
-  "word": "identifier",
   "rules": {
     "program": {
       "type": "SEQ",
@@ -163,37 +162,49 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "html_node"
+          "type": "PREC",
+          "value": 2,
+          "content": {
+            "type": "SYMBOL",
+            "name": "html_node"
+          }
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "jx_opening_element"
-            },
-            {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "SYMBOL",
-                  "name": "jx_children"
-                },
-                {
-                  "type": "BLANK"
-                }
-              ]
-            },
-            {
-              "type": "SYMBOL",
-              "name": "jx_closing_element"
-            }
-          ]
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "jx_opening_element"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "jx_children"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "jx_closing_element"
+              }
+            ]
+          }
         },
         {
-          "type": "SYMBOL",
-          "name": "jx_self_closing_element"
+          "type": "PREC",
+          "value": 0,
+          "content": {
+            "type": "SYMBOL",
+            "name": "jx_self_closing_element"
+          }
         }
       ]
     },
@@ -205,13 +216,8 @@
           "value": "<"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "jx_element_name"
-          },
-          "named": true,
-          "value": "tag_name"
+          "type": "SYMBOL",
+          "name": "_start_tag_name"
         },
         {
           "type": "CHOICE",
@@ -523,18 +529,6 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "jx_text"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "jx_element"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "jx_fragment"
-        },
-        {
           "type": "SEQ",
           "members": [
             {
@@ -550,6 +544,18 @@
               "value": "}"
             }
           ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_element"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "jx_fragment"
         }
       ]
     },
@@ -8466,8 +8472,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
-              "value": ","
+              "type": "SYMBOL",
+              "name": "css_query"
             },
             {
               "type": "REPEAT",
@@ -8475,12 +8481,12 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "css_query"
-                  },
-                  {
                     "type": "STRING",
                     "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "css_query"
                   }
                 ]
               }
@@ -8756,8 +8762,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "STRING",
-          "value": ","
+          "type": "SYMBOL",
+          "name": "css_selector"
         },
         {
           "type": "REPEAT",
@@ -8765,12 +8771,12 @@
             "type": "SEQ",
             "members": [
               {
-                "type": "SYMBOL",
-                "name": "css_selector"
-              },
-              {
                 "type": "STRING",
                 "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "css_selector"
               }
             ]
           }
@@ -10346,8 +10352,8 @@
           "type": "SEQ",
           "members": [
             {
-              "type": "STRING",
-              "value": ","
+              "type": "SYMBOL",
+              "name": "css_value"
             },
             {
               "type": "REPEAT",
@@ -10355,12 +10361,12 @@
                 "type": "SEQ",
                 "members": [
                   {
-                    "type": "SYMBOL",
-                    "name": "css_value"
-                  },
-                  {
                     "type": "STRING",
                     "value": ","
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "css_value"
                   }
                 ]
               }
@@ -11048,7 +11054,7 @@
     },
     "htmltext": {
       "type": "PATTERN",
-      "value": "[^<>&\\s]([^<>&]*[^<>&\\s])?"
+      "value": "[^<>&\\/\\{\\}\\s=](?:[^<>&\\/\\{\\}\\s=]*[^<>&\\/\\{\\}\\s=])?"
     }
   },
   "extras": [
@@ -11192,10 +11198,6 @@
     {
       "type": "SYMBOL",
       "name": "_pseudo_class_selector_colon"
-    },
-    {
-      "type": "SYMBOL",
-      "name": "jx_attributes_end"
     },
     {
       "type": "SYMBOL",

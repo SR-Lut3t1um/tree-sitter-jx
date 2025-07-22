@@ -1855,7 +1855,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "css_value",
@@ -2183,7 +2183,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "css_selector",
@@ -4001,21 +4001,6 @@
     }
   },
   {
-    "type": "jx_member_expression",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "jx_identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "jx_module_declaration",
     "named": true,
     "fields": {},
@@ -4092,15 +4077,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "jx_attributes",
-          "named": true
-        },
-        {
-          "type": "tag_name",
           "named": true
         }
       ]
@@ -5858,29 +5839,6 @@
     }
   },
   {
-    "type": "tag_name",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "jx_identifier",
-          "named": true
-        },
-        {
-          "type": "jx_member_expression",
-          "named": true
-        },
-        {
-          "type": "jx_namespaced_name",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "template_expression",
     "named": true,
     "fields": {
@@ -7166,6 +7124,10 @@
   {
     "type": "synchronized",
     "named": false
+  },
+  {
+    "type": "tag_name",
+    "named": true
   },
   {
     "type": "this",

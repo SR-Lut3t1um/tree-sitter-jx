@@ -16,7 +16,6 @@ enum TokenType {
     COMMENT,
     DESCENDANT_OP,
     PSEUDO_CLASS_SELECTOR_COLON,
-    JX_ATTRIBUTES,
     ERROR_RECOVERY,
 };
 
@@ -24,6 +23,8 @@ enum TokenType {
 typedef struct {
     Array(Tag) tags;
 } Scanner;
+
+
 
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
@@ -370,6 +371,9 @@ static bool scan_html(Scanner *scanner, TSLexer *lexer, const bool *valid_symbol
         skip(lexer);
     }
 
+    if (lexer->lookahead == '{' && !valid_symbols[SELF_CLOSING_TAG_DELIMITER] ) return false;
+
+
     switch (lexer->lookahead) {
         case '<':
             lexer->mark_end(lexer);
@@ -419,7 +423,6 @@ static bool scan_attributes(Scanner *scanner, TSLexer *lexer, const bool *valid_
             if (last_char != '/') {
                 lexer->mark_end(lexer);
             }
-            lexer->result_symbol = JX_ATTRIBUTES;
             return true;
         } else {
             last_char = lexer->lookahead;
@@ -433,19 +436,25 @@ static bool scan_attributes(Scanner *scanner, TSLexer *lexer, const bool *valid_
 static bool scan(Scanner *scanner, TSLexer *lexer, const bool *valid_symbols) {
     fprintf(stderr, "looking for char %c \n", lexer->lookahead);
     fprintf(stderr, "is_css: %b \n", valid_symbols[DESCENDANT_OP]);
+    if (lexer->lookahead == '{') {
+        return false;
+    }
     bool ret_value = false;
-    // if (valid_symbols[JX_ATTRIBUTES]) {
-    //      ret_value = scan_attributes(scanner, lexer, valid_symbols);
-    //}
-    if (ret_value) {
-        return ret_value;
-    }
-    if (!valid_symbols[ERROR_RECOVERY]) {
-        ret_value =  scan_html(scanner, lexer, valid_symbols);
-    }
     if (valid_symbols[DESCENDANT_OP] || valid_symbols[PSEUDO_CLASS_SELECTOR_COLON]) {
         ret_value =  scan_css(scanner, lexer, valid_symbols);
     }
+    if (ret_value) {
+        return ret_value;
+    }
+    if (valid_symbols[START_TAG_NAME]
+    || valid_symbols[SCRIPT_START_TAG_NAME]
+    || valid_symbols[STYLE_START_TAG_NAME]
+    || valid_symbols[END_TAG_NAME]
+    || valid_symbols[SELF_CLOSING_TAG_DELIMITER]
+    || valid_symbols[IMPLICIT_END_TAG]) {
+        ret_value =  scan_html(scanner, lexer, valid_symbols);
+    }
+    
     if (ret_value) {
         return ret_value;
     }
