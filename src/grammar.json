@@ -217,7 +217,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_start_tag_name"
+          "name": "jx_element_name"
         },
         {
           "type": "CHOICE",
@@ -245,13 +245,8 @@
           "value": "<"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_start_tag_name"
-          },
-          "named": true,
-          "value": "tag_name"
+          "type": "SYMBOL",
+          "name": "jx_element_name"
         },
         {
           "type": "CHOICE",
@@ -279,13 +274,8 @@
           "value": "</"
         },
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_end_tag_name"
-          },
-          "named": true,
-          "value": "tag_name"
+          "type": "SYMBOL",
+          "name": "jx_element_name"
         },
         {
           "type": "STRING",

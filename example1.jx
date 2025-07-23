@@ -11,12 +11,13 @@ Example {
             <h1>
                 Hello world
             </h1>
+            <br/>
             <h2>
                 {example}
             </h2>
             {test}
             <h1>
-                {test1.test()}
+                {test1.test(new ArrayList<>())}
             </h1>
             <Example2>
             </Example2>

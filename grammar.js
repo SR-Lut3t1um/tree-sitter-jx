@@ -133,7 +133,7 @@ module.exports = grammar({
       prec(0, $.jx_self_closing_element),
     ),
     jx_self_closing_element: $ => seq(
-      '<', $._start_tag_name, optional($.jx_attributes), '/>'
+      '<', $.jx_element_name, optional($.jx_attributes), '/>'
     ),
     jx_opening_element: $ => seq(
       '<', $.jx_element_name, optional($.jx_attributes), '>'

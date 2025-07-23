@@ -25,7 +25,64 @@ typedef struct {
 } Scanner;
 
 
+static const struct {
+  const char *name;
+  size_t      len;
+} HTML_ELEMENTS[] = {
+  { "A",           1 }, { "ABBR",        4 }, { "ADDRESS",    7 },
+  { "AREA",        4 }, { "ARTICLE",     7 }, { "ASIDE",      5 },
+  { "AUDIO",       5 }, { "B",           1 }, { "BASE",        4 },
+  { "BDI",         3 }, { "BDO",         3 }, { "BLOCKQUOTE", 10 },
+  { "BODY",        4 }, { "BR",          2 }, { "BUTTON",      6 },
+  { "CANVAS",      6 }, { "CAPTION",     7 }, { "CITE",        4 },
+  { "CODE",        4 }, { "COL",         3 }, { "COLGROUP",    8 },
+  { "DATA",        4 }, { "DATALIST",    8 }, { "DD",          2 },
+  { "DEL",         3 }, { "DETAILS",     7 }, { "DFN",         3 },
+  { "DIALOG",      6 }, { "DIV",         3 }, { "DL",          2 },
+  { "DT",          2 }, { "EM",          2 }, { "EMBED",       5 },
+  { "FIELDSET",    8 }, { "FIGCAPTION",  10}, { "FIGURE",      6 },
+  { "FOOTER",      6 }, { "FORM",        4 }, { "H1",          2 },
+  { "H2",          2 }, { "H3",          2 }, { "H4",          2 },
+  { "H5",          2 }, { "H6",          2 }, { "HEAD",        4 },
+  { "HEADER",      6 }, { "HGROUP",      6 }, { "HR",          2 },
+  { "HTML",        4 }, { "I",           1 }, { "IFRAME",      6 },
+  { "IMG",         3 }, { "INPUT",       5 }, { "INS",         3 },
+  { "KBD",         3 }, { "LABEL",       5 }, { "LEGEND",      6 },
+  { "LI",          2 }, { "LINK",        4 }, { "MAIN",        4 },
+  { "MAP",         3 }, { "MARK",        4 }, { "MATH",        4 },
+  { "MENU",        4 }, { "META",        4 }, { "METER",       5 },
+  { "NAV",         3 }, { "NOFRAMES",    8 }, { "NOSCRIPT",    8 },
+  { "OBJECT",      6 }, { "OL",          2 }, { "OPTGROUP",    8 },
+  { "OPTION",      6 }, { "OUTPUT",      6 }, { "P",           1 },
+  { "PARAM",       5 }, { "PICTURE",     7 }, { "PRE",         3 },
+  { "PROGRESS",    8 }, { "Q",           1 }, { "RB",          2 },
+  { "RP",          2 }, { "RT",          2 }, { "RTC",         3 },
+  { "RUBY",        4 }, { "S",           1 }, { "SAMP",        4 },
+  { "SCRIPT",      6 }, { "SECTION",     7 }, { "SELECT",      6 },
+  { "SMALL",       5 }, { "SOURCE",      6 }, { "SPAN",        4 },
+  { "STRONG",      6 }, { "STYLE",       5 }, { "SUB",         3 },
+  { "SUMMARY",     7 }, { "SUP",         3 }, { "SVG",         3 },
+  { "TABLE",       5 }, { "TBODY",       5 }, { "TD",          2 },
+  { "TEMPLATE",    8 }, { "TEXTAREA",    8 }, { "TFOOT",       5 },
+  { "TH",          2 }, { "THEAD",       5 }, { "TIME",        4 },
+  { "TITLE",       5 }, { "TR",          2 }, { "TRACK",       5 },
+  { "U",           1 }, { "UL",          2 }, { "VAR",         3 },
+  { "VIDEO",       5 }, { "WBR",         3 }
+};
 
+static const size_t HTML_ELEMENTS_COUNT = sizeof(HTML_ELEMENTS) / sizeof(*HTML_ELEMENTS);
+
+bool is_valid_html_element(const String tag_name) {
+    for (size_t i = 0; i < HTML_ELEMENTS_COUNT; i++) {
+        if (tag_name.size == HTML_ELEMENTS[i].len &&
+            memcmp(tag_name.contents,
+                   HTML_ELEMENTS[i].name,
+                   HTML_ELEMENTS[i].len) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 #define MAX(a, b) ((a) > (b) ? (a) : (b))
 
@@ -263,7 +320,7 @@ static bool scan_implicit_end_tag(Scanner *scanner, TSLexer *lexer) {
     }
 
     String tag_name = scan_tag_name(lexer);
-    if (tag_name.size == 0 && !lexer->eof(lexer)) {
+    if ((tag_name.size == 0 && !lexer->eof(lexer)) || ! is_valid_html_element(tag_name)) {
         array_delete(&tag_name);
         return false;
     }
@@ -306,7 +363,7 @@ static bool scan_implicit_end_tag(Scanner *scanner, TSLexer *lexer) {
 
 static bool scan_start_tag_name(Scanner *scanner, TSLexer *lexer) {
     String tag_name = scan_tag_name(lexer);
-    if (tag_name.size == 0) {
+    if (tag_name.size == 0 || ! is_valid_html_element(tag_name)) {
         array_delete(&tag_name);
         return false;
     }
@@ -330,7 +387,7 @@ static bool scan_start_tag_name(Scanner *scanner, TSLexer *lexer) {
 static bool scan_end_tag_name(Scanner *scanner, TSLexer *lexer) {
     String tag_name = scan_tag_name(lexer);
 
-    if (tag_name.size == 0) {
+    if (tag_name.size == 0 || ! is_valid_html_element(tag_name)) {
         array_delete(&tag_name);
         return false;
     }
